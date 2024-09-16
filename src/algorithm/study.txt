@@ -32,3 +32,8 @@ S[i] = S[i-1] + A[i]
 그렇다면, 한 배열에 대하여 i에서 j까지의 구간합을 구하고 싶다면?
 구간합을 구하는 공식-> S[j] - S[i-1]
 
+투포인터 이동 원칙
+sum > N: sum = sum - start_index; start_index++;
+sum < N: end_index++; sum = sum + end_index;
+sum == N: end_index++; sum = sum + end_index; count++;
+
