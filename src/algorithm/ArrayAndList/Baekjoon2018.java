@@ -2,6 +2,10 @@ package algorithm.ArrayAndList;
 
 import java.util.Scanner;
 
+//여기서의 투포인터 이동 원칙
+/*sum > N: sum = sum - start_index; start_index++;
+sum < N: end_index++; sum = sum + end_index;
+sum == N: end_index++; sum = sum + end_index; count++;*/
 public class Baekjoon2018 {
     public static void main(String[] args) {
         //투포인터 문제
