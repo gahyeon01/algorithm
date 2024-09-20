@@ -1,7 +1,11 @@
 package algorithm.StackAndQueue;
+
+import java.util.Scanner;
+import java.util.Stack;
+
 /*
-* 임의의 수열을 스택에 넣었다가 출력하는 방식으로 오름차순 수열을 출력할 수 있는지 확인하고,
-* 출력할 수 있다면 push와 pop연산(출력을 포함)을 어떤 순서로 수행해야 하는지를 알아내는 프로그램을 작성해보자.
+* 1부터 N까지 오름차순으로 스택에 push를 진행하면서 필요할 때마다 pop을 하여
+* 주어진 임의의 수열을 출력할 수 있는지에 대한 문제이다.
 * */
 public class Baekjoon1874 {
     /*
@@ -12,5 +16,40 @@ public class Baekjoon1874 {
      * 불가능 할 때는 NO를 출력한다.
      *
      */
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int A[] = new int[N];
+        for(int i=0; i<N; i++){
+            A[i] = sc.nextInt();
+        }
+        Stack<Integer> stack = new Stack<>();
+        int num = 1;
+        boolean result = true;
+        StringBuffer bf = new StringBuffer();
+        for(int i=0; i<A.length; i++){
+            int su = A[i];
+            if( su >= num){
+                while (su>=num){
+                    stack.push(num++); //넣어주고 증가
+                    bf.append("+\n");
+                }
+                stack.pop();
+                bf.append("-\n");
+            }else{
+                int n = stack.pop();
+                if(n > su){
+                    System.out.println("NO");
+                    result = false;
+                    break;
+                }else{
+                    bf.append("-\n");
+                }
+            }
+        }
+        if(result){
+            System.out.println(bf.toString());
+        }
+    }
 
 }
