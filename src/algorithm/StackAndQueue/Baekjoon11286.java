@@ -11,6 +11,6 @@ package algorithm.StackAndQueue;
 * */
 public class Baekjoon11286 {
     public static void main(String[] args) {
-
+//우선순위 큐에 대한 알고리즘 문제
     }
 }
