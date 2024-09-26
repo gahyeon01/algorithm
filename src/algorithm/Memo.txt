@@ -1,0 +1,76 @@
+- Scanner 클래스의 next(), nextLine()의 차이에 대해서
+
+next()
+공백을 기준으로 한 단어 또는 한 문자씩 입력받는다.
+버퍼에 입력된 문자나 문자열에서 공백 전까지의 단어를 읽는다.
+개행 문자를 가져오지 않는다.
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        String str = scan.next();
+        System.out.println(str);
+    }
+} - 라는 예제가 있을 때,
+Hello World라고 입력을 하면 Hello만 출력이 된다.
+
+nextLine()
+문자 또는 엔터를 치기 전까지의 문장 전체를 입력받는다.
+버퍼에 입력된 문자열을 개행 문자까지 다 가져온다.
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        String str = scan.nextLine();
+        System.out.println(str);
+    }
+} -라는 예제가 있을 때,
+Hello World라고 입력을 하게 되면, Hello World라고 출력이 된다.
+
+- 주의사항
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        int num;
+        String str;
+        System.out.println("num입력");
+        num = input.nextInt();
+
+        System.out.println("str입력");
+        str = input.nextLine();
+
+        System.out.println("num : " + num);
+        System.out.println("str : " + str);
+        input.close();
+    }
+}
+이러한 예제가 있을 때,
+
+입출력 결과문은 다음과 같다
+num입력
+10    <= 입력
+str입력
+num : 10
+str :
+
+원했던 입력과정이 제대로 진행되지 않고 num을 입력하면 바로 출력이 되어 버린다.
+왜냐하면, next()은 개행문자를 무시하고 입력을 받고 nextLine()은 한 줄 단위로 입력을 받기 때문에
+개행문자를 포함하게 된다.
+
+즉, 위에 출력결과처럼 10을 입력하고 Enter를 쳤다면 버퍼에는 10\n이 존재한다.
+이때 nextInt()가 버퍼의 내용을 가져올 때 개행문자를 무시하고 가져오기 때문에 10만을 가져오게 된다.
+그러면 버퍼에 \n이 남아있게 되는데 nextLine()은 공백문자, 개행문자를 포함시키기 때문에 \n만 가져오고 프로그램이 종료되는 것이다.
+
+따라서 이를 해결하기 위해서는 nextLine()을 next()로 바꾸거나
+nextInt()와 nextLine() 사이에 nextLine() 또는 skip("\r\n")을 하나 추가하여 개행문자를
+버퍼에서 없애주면 원하는 문자열을 입력받을 수 있다.
+
+출처:
+https://velog.io/@suyyeon/JAVA-Scanner%ED%81%B4%EB%9E%98%EC%8A%A4-next-nextLine-%EC%B0%A8%EC%9D%B4
